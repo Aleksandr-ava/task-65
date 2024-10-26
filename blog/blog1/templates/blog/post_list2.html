@@ -1,0 +1,45 @@
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Blog Posts</title>
+   </head>
+   <body>
+       <h1>Blog Posts</h1>
+
+       <form method="get">
+           <label>Постов на странице:</label>
+           <input type="hidden" name="page">
+           <select name="per_page" onchange="this.form.submit()">
+               <option></option>
+               <option>3</option>
+               <option>5</option>
+               <option>10</option>
+           </select>
+       </form>
+       <ul>
+           {% for post in page_obj %}
+               <li>{{ post.title }} - {{ post.created_at }}</li>
+           {% endfor %}
+       </ul>
+
+       <div class="pagination">
+           <span class="step-links">
+               {% if page_obj.has_previous %}
+                   <a href="?page=1">&laquo; Начало-</a>
+                   <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+               {% endif %}
+
+               <span class="current">
+                   Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+               </span>
+
+               {% if page_obj.has_next %}
+                   <a href="?page={{ page_obj.next_page_number }}">Вперёд</a>
+                   <a href="?page={{ page_obj.paginator.num_pages }}">-Конец &raquo;</a>
+               {% endif %}
+           </span>
+       </div>
+   </body>
+   </html>
