@@ -12,10 +12,9 @@
            <label>Постов на странице:</label>
            <input type="hidden" name="page">
            <select name="per_page" onchange="this.form.submit()">
-               <option></option>
-               <option>3</option>
-               <option>5</option>
-               <option>10</option>
+               <option {% if per_page == 3 %}selected{% endif %} value="3" >3</option>
+               <option {% if per_page == 5 %}selected{% endif %} value="5" >5</option>
+               <option {% if per_page == 10 %}selected{% endif %} value="10" >10</option>
            </select>
        </form>
        <ul>
